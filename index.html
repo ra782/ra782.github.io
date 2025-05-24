@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>復習テスト（第2回）</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Meiryo, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            margin: 20px;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .test-title {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .section-title {
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+            color: #4a5568;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+        .question-block {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .question-number {
+            font-weight: 700;
+            font-size: 1.3em;
+            color: #2c5282;
+        }
+        .question-text {
+            margin-top: 8px;
+            margin-bottom: 18px;
+            font-size: 1.1em;
+            white-space: pre-wrap; /* 改行をそのまま表示 */
+        }
+        .options button {
+            display: block;
+            width: 100%;
+            padding: 12px 15px;
+            margin: 8px 0;
+            text-align: left;
+            font-size: 1em;
+            background-color: #f7fafc;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+        }
+        .options button:hover:not(:disabled) {
+            background-color: #e2e8f0;
+            border-color: #a0aec0;
+        }
+        .options button:disabled {
+            cursor: default;
+            opacity: 0.6;
+        }
+        .options button.correct {
+            background-color: #48bb78 !important;
+            color: white !important;
+            border-color: #38a169 !important;
+        }
+        .options button.incorrect {
+            background-color: #f56565 !important;
+            color: white !important;
+            border-color: #c53030 !important;
+        }
+        .feedback {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 1em;
+            min-height: 22px;
+            border-width: 1px;
+            border-style: solid;
+        }
+        .feedback.correct {
+            background-color: #c6f6d5;
+            color: #2f855a;
+            border-color: #9ae6b4;
+        }
+        .feedback.incorrect {
+            background-color: #fed7d7;
+            color: #c53030;
+            border-color: #fbb6ce;
+        }
+        .source {
+            font-size: 0.9em;
+            color: #4a5568;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #edf2f7;
+            border: 1px dashed #cbd5e0;
+            border-radius: 6px;
+        }
+        #score-container {
+            margin-top: 40px;
+            padding: 25px;
+            background-color: #e2e8f0;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+        }
+        #score-container h2{
+            margin-top:0;
+            color: #2c5282;
+        }
+        #score-text {
+            margin-bottom: 20px;
+        }
+        #score-container button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #4299e1;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        #score-container button:hover {
+            background-color: #2b6cb0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="test-title">復習テスト（第2回）</h1>
+
+    <div id="quiz-container">
+        </div>
+
+    <div id="score-container" style="display:none;">
+        <h2>テスト結果</h2>
+        <p id="score-text"></p>
+        <button onclick="location.reload()">もう一度挑戦する</button>
+    </div>
+
+    <script>
+        const quizData = [
+            // I. 動詞の活用と用法 (ser, tener, ir, poder, querer)
+            {
+                section: "I. 動詞の活用と用法 (ser, tener, ir, poder, querer)",
+                questionNumber: 1,
+                question: "次の文の空欄に最も適切な ser の活用形を選びなさい。\n\"Yo _____ de Oviedo.\"",
+                options: { a: "eres", b: "es", c: "soy", d: "somos" },
+                answer: 'c',
+                source: "Conversación04 + ir.pdf"
+            },
+            {
+                questionNumber: 2,
+                question: "「彼らは学生です」という意味になるように、空欄に最も適切な ser の活用形を選びなさい。\n\"Ellos _____ estudiantes.\"",
+                options: { a: "son", b: "sois", c: "somos", d: "es" },
+                answer: 'a',
+                source: "(repaso.pdf の E) Conjugación de ser を参考にした基礎問題)"
+            },
+            {
+                questionNumber: 3,
+                question: "動詞 tener の直説法現在形、「Nosotros」に該当する活用はどれですか？",
+                options: { a: "tienes", b: "tiene", c: "tenemos", d: "tienen" },
+                answer: 'c',
+                source: "Texto06 tener (1).pdf"
+            },
+            {
+                questionNumber: 4,
+                question: "「君、何歳？」と尋ねる表現として正しいものはどれですか？",
+                options: { a: "¿Qué años tienes?", b: "¿Cuántos años eres?", c: "¿Cuántos años tienes?", d: "¿Qué edad es?" },
+                answer: 'c',
+                source: "Texto06 tener (1).pdf"
+            },
+            {
+                questionNumber: 5,
+                question: "「私たちは明日の試験のために準備をしなければならない」という意味になるように、空欄に最も適切な語を選びなさい。\n\"Nosotros _____ que prepararnos para el examen de mañana.\"",
+                options: { a: "tenemos", b: "podemos", c: "vamos", d: "queremos" },
+                answer: 'a',
+                source: "Texto06 tener (1).pdf (tener que + 動詞の原形)"
+            },
+            {
+                questionNumber: 6,
+                question: "動詞 ir の直説法現在形、「Tú」に該当する活用はどれですか？",
+                options: { a: "voy", b: "va", c: "vas", d: "vais" },
+                answer: 'c',
+                source: "Conversación04 + ir.pdf"
+            },
+            {
+                questionNumber: 7,
+                question: "「私は図書館へ行きます」という意味になるように、空欄に最も適切な語を選びなさい。\n\"Yo _____ a la biblioteca.\"",
+                options: { a: "soy", b: "tengo", c: "voy", d: "puedo" },
+                answer: 'c',
+                source: "Conversación04 + ir.pdf"
+            },
+            {
+                questionNumber: 8,
+                question: "「私たちは今週末、映画を見るつもりです」という意味になるように、空欄に最も適切な語を選びなさい。\n\"Nosotros _____ a ver una película este fin de semana.\"",
+                options: { a: "tenemos", b: "vamos", c: "podemos", d: "queremos" },
+                answer: 'b',
+                source: "Conversación04 + ir.pdf"
+            },
+            {
+                questionNumber: 9,
+                question: "動詞 poder の直説法現在形、「Yo」に該当する活用はどれですか？",
+                options: { a: "puedes", b: "puede", c: "puedo", d: "podemos" },
+                answer: 'c',
+                source: "Expresiones03 dias, meses, estaciones + poder.pdf"
+            },
+            {
+                questionNumber: 10,
+                question: "「明日パーティーに来られますか？」と尋ねる文として正しいものはどれですか？",
+                options: { a: "¿Vas a venir a la fiesta mañana?", b: "¿Tienes que venir a la fiesta mañana?", c: "¿Puedes venir a la fiesta mañana?", d: "¿Quieres venir a la fiesta mañana?" },
+                answer: 'c',
+                source: "Expresiones03 dias, meses, estaciones + poder.pdf"
+            },
+            {
+                questionNumber: 11,
+                question: "動詞 querer の直説法現在形、「Él/Ella/Usted」に該当する活用はどれですか？",
+                options: { a: "quiero", b: "quieres", c: "quiere", d: "queremos" },
+                answer: 'c',
+                source: "(ユーザーからの特筆事項に基づき、以前の知識から querer を追加)"
+            },
+            {
+                questionNumber: 12,
+                question: "「私はパエリアが欲しいです」という意味になるように、空欄に最も適切な語を選びなさい。\n\"Yo _____ paella.\"",
+                options: { a: "tengo", b: "voy", c: "puedo", d: "quiero" },
+                answer: 'd',
+                source: "(ユーザーからの特筆事項に基づき、以前の知識から querer を追加)"
+            },
+            {
+                section: "II. 名詞と冠詞・指示詞・所有形容詞",
+                questionNumber: 13,
+                question: "\"aula\" (教室) の前に来る正しい単数定冠詞はどれですか？",
+                options: { a: "la", b: "el", c: "un", d: "una" },
+                answer: 'b',
+                source: "Conversación04 + ir.pdf, Texto05 articulos, demostrativos y posesivos.pdf"
+            },
+            {
+                questionNumber: 14,
+                question: "「いくつかの雑誌」を意味する表現として正しいものはどれですか？",
+                options: { a: "un revistas", b: "unos revistas", c: "una revistas", d: "unas revistas" },
+                answer: 'd',
+                source: "Texto05 articulos, demostrativos y posesivos.pdf"
+            },
+            {
+                questionNumber: 15,
+                question: "「この本」をスペイン語で正しく表現したものはどれですか？ (libro は男性名詞)",
+                options: { a: "este libro", b: "esta libro", c: "ese libro", d: "aquel libro" },
+                answer: 'a',
+                source: "Texto05 articulos, demostrativos y posesivos.pdf"
+            },
+            {
+                questionNumber: 16,
+                question: "「私たちの家」をスペイン語で正しく表現したものはどれですか？ (casa は女性名詞)",
+                options: { a: "nuestro casa", b: "nuestros casa", c: "nuestra casa", d: "nuestras casa" },
+                answer: 'c',
+                source: "Texto05 articulos, demostrativos y posesivos.pdf"
+            },
+            {
+                questionNumber: 17,
+                question: "定冠詞の縮約形について、\"a + el\" は何になりますか？",
+                options: { a: "al", b: "del", c: "el", d: "a el" },
+                answer: 'a',
+                source: "Texto05 articulos, demostrativos y posesivos.pdf"
+            },
+            {
+                section: "III. 曜日・月・季節・数・時間",
+                questionNumber: 18,
+                question: "「月曜日」を意味するスペイン語はどれですか？",
+                options: { a: "martes", b: "lunes", c: "miércoles", d: "jueves" },
+                answer: 'b',
+                source: "Expresiones03 dias, meses, estaciones + poder.pdf"
+            },
+            {
+                questionNumber: 19,
+                question: "「毎週日曜日に私はいつも家にいます。」という意味になるように、空欄に最も適切な形を選びなさい。\n\"_____ domingos me quedo siempre en casa.\"",
+                options: { a: "El", b: "Los", c: "Un", d: "Unos" },
+                answer: 'b',
+                source: "Expresiones03 dias, meses, estaciones + poder.pdf"
+            },
+            {
+                questionNumber: 20,
+                question: "「夏はとても暑い」を意味するスペイン語の文として、より自然なものはどれですか？",
+                options: { a: "El verano es mucho calor.", b: "En el verano hace mucho calor.", c: "En verano hace mucho calor.", d: "Verano está mucho calor." },
+                answer: 'c',
+                source: "Expresiones03 dias, meses, estaciones + poder.pdf"
+            },
+            {
+                questionNumber: 21,
+                question: "「15」をスペイン語で正しく表現したものはどれですか？",
+                options: { a: "cinco y diez", b: "quince", c: "diecicinco", d: "cincodiez" },
+                answer: 'b',
+                source: "Expresiones02 numero y horario.pdf"
+            },
+            {
+                questionNumber: 22,
+                question: "「Son las tres y media.」は何時を示していますか？",
+                options: { a: "3時15分", b: "3時30分", c: "3時45分", d: "2時30分" },
+                answer: 'b',
+                source: "Expresiones02 numero y horario.pdf"
+            },
+            {
+                section: "IV. hay と場所・会話表現",
+                questionNumber: 23,
+                question: "「ここに辞書があります」をスペイン語で正しく表現したものはどれですか？",
+                options: { a: "Aquí es un diccionario.", b: "Aquí está un diccionario.", c: "Aquí hay un diccionario.", d: "Aquí tiene un diccionario." },
+                answer: 'c',
+                source: "Texto04 hay.pdf"
+            },
+            {
+                questionNumber: 24,
+                question: "場所を示す指示副詞について、話し手から最も遠い場所を示すものはどれですか？",
+                options: { a: "aquí", b: "ahí", c: "allí", d: "este" },
+                answer: 'c',
+                source: "Texto04 hay.pdf"
+            },
+            {
+                questionNumber: 25,
+                question: "初めて会った人に「はじめまして」と伝える表現として、話者が男性の場合、より一般的なものはどれですか？",
+                options: { a: "Mucho gusto.", b: "Encantada.", c: "¿Qué tal?", d: "Adiós." },
+                answer: 'a',
+                source: "Conversación04 + ir.pdf, Expresiones01 saludos.pdf (補足: Encantado も男性話者の場合に適切です。問題の意図としてより汎用的なものを想定しています。)"
+            },
+            {
+                questionNumber: 26,
+                question: "\"Perdona. ¿Sabes dónde está el aula 8?\" という質問は、どのような状況で使われますか？",
+                options: { a: "相手の体調を尋ねるとき", b: "場所を尋ねるとき", c: "自己紹介をするとき", d: "天候について話すとき" },
+                answer: 'b',
+                source: "Conversación04 + ir.pdf"
+            },
+            {
+                questionNumber: 27,
+                question: "¿A dónde vas?\" と尋ねられたときの適切な返答はどれですか？",
+                options: { a: "Soy de Tokio.", b: "Voy a la biblioteca.", c: "Estoy bien, gracias.", d: "Me llamo María." },
+                answer: 'b',
+                source: "Conversación04 + ir.pdf, Expresiones01 saludos.pdf"
+            },
+            {
+                questionNumber: 28,
+                question: "「ごめんなさい。すみません。」という意味で、相手が同年代の学生だと想定して使われる砕けた表現はどれですか？",
+                options: { a: "Lo siento.", b: "Perdón.", c: "Perdona.", d: "Disculpe." },
+                answer: 'c',
+                source: "Conversación04 + ir.pdf"
+            }
+        ];
+
+        // DOMが完全に読み込まれてからスクリプトを実行
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizContainer = document.getElementById('quiz-container');
+            const scoreContainer = document.getElementById('score-container');
+            const scoreTextEl = document.getElementById('score-text');
+
+            if (!quizContainer || !scoreContainer || !scoreTextEl) {
+                console.error("必要なHTML要素が見つかりません。IDを確認してください。");
+                alert("ページの読み込みに問題が発生しました。必要な要素が見つかりません。");
+                return;
+            }
+
+            let currentSection = "";
+            let score = 0;
+            let answeredQuestions = 0;
+
+            quizData.forEach((item) => {
+                if (item.section && item.section !== currentSection) {
+                    currentSection = item.section;
+                    const sectionTitle = document.createElement('h2');
+                    sectionTitle.className = 'section-title';
+                    sectionTitle.textContent = currentSection;
+                    quizContainer.appendChild(sectionTitle);
+                }
+
+                const questionBlock = document.createElement('div');
+                questionBlock.className = 'question-block';
+                questionBlock.id = `question-${item.questionNumber}`;
+
+                const questionNumberP = document.createElement('p');
+                questionNumberP.className = 'question-number';
+                questionNumberP.textContent = `設問${item.questionNumber}:`;
+                questionBlock.appendChild(questionNumberP);
+
+                const questionTextP = document.createElement('p');
+                questionTextP.className = 'question-text';
+                questionTextP.textContent = item.question; // textContentで改行も安全に扱える (CSS white-space: pre-wrap と併用)
+                questionBlock.appendChild(questionTextP);
+
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                optionsDiv.id = `options-${item.questionNumber}`; // 各選択肢グループにIDを付与
+
+                for (const key in item.options) {
+                    const button = document.createElement('button');
+                    button.setAttribute('data-question-id', String(item.questionNumber)); // 念のためStringに
+                    button.setAttribute('data-option', key);
+                    button.innerHTML = `<b>${key.toUpperCase()})</b> ${item.options[key]}`;
+                    button.onclick = handleOptionClick;
+                    optionsDiv.appendChild(button);
+                }
+                questionBlock.appendChild(optionsDiv);
+
+                const feedbackP = document.createElement('p');
+                feedbackP.className = 'feedback';
+                feedbackP.id = `feedback-${item.questionNumber}`;
+                questionBlock.appendChild(feedbackP);
+
+                if (item.source) {
+                    const sourceP = document.createElement('p');
+                    sourceP.className = 'source';
+                    sourceP.id = `source-${item.questionNumber}`;
+                    sourceP.textContent = `ソース: ${item.source}`;
+                    sourceP.style.display = 'none'; // 初期状態は非表示
+                    questionBlock.appendChild(sourceP);
+                }
+                quizContainer.appendChild(questionBlock);
+            });
+
+            function handleOptionClick(event) {
+                const selectedButton = event.currentTarget;
+                const questionId = parseInt(selectedButton.getAttribute('data-question-id'), 10);
+                const selectedOptionKey = selectedButton.getAttribute('data-option');
+
+                const questionData = quizData.find(q => q.questionNumber === questionId);
+                const optionsGroup = document.getElementById(`options-${questionId}`);
+
+                if (!questionData || (optionsGroup && optionsGroup.dataset.answered === 'true')) {
+                    return; // データがないか、既に回答済みなら何もしない
+                }
+                if(optionsGroup) optionsGroup.dataset.answered = 'true'; // 回答済みの印
+
+                answeredQuestions++;
+
+                const correctAnswerKey = questionData.answer;
+                const correctAnswerText = questionData.options[correctAnswerKey];
+                const feedbackEl = document.getElementById(`feedback-${questionId}`);
+                const sourceEl = document.getElementById(`source-${questionId}`);
+
+                const allOptionButtons = document.querySelectorAll(`#options-${questionId} button`);
+                allOptionButtons.forEach(btn => {
+                    btn.disabled = true; // 全てのボタンを無効化
+                });
+
+                if (selectedOptionKey === correctAnswerKey) {
+                    score++;
+                    selectedButton.classList.add('correct');
+                    if(feedbackEl) {
+                        feedbackEl.textContent = "正解です！";
+                        feedbackEl.className = 'feedback correct';
+                    }
+                    if (sourceEl) {
+                        sourceEl.style.display = 'none';
+                    }
+                } else {
+                    selectedButton.classList.add('incorrect');
+                    if(feedbackEl) {
+                        feedbackEl.innerHTML = `不正解です。正解は <b>${correctAnswerKey.toUpperCase()}) ${correctAnswerText}</b> です。`;
+                        feedbackEl.className = 'feedback incorrect';
+                    }
+                    if (sourceEl) {
+                        sourceEl.style.display = 'block';
+                    }
+                    // 正解の選択肢もハイライト（任意）
+                    allOptionButtons.forEach(btn => {
+                        if (btn.getAttribute('data-option') === correctAnswerKey) {
+                            // 例: btn.style.borderColor = 'green'; btn.style.borderWidth = '2px';
+                        }
+                    });
+                }
+
+                if (answeredQuestions === quizData.length) {
+                    showFinalScore();
+                }
+            }
+
+            function showFinalScore() {
+                if (scoreContainer && scoreTextEl && quizContainer) {
+                    scoreContainer.style.display = 'block';
+                    const percentage = (quizData.length > 0) ? (score / quizData.length * 100).toFixed(1) : 0;
+                    scoreTextEl.innerHTML = `全 ${quizData.length} 問中 ${score} 問正解しました。<br>正解率: ${percentage}%`;
+                    quizContainer.style.display = 'none';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
