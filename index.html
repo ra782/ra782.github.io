@@ -3,489 +3,474 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>復習テスト（第2回）</title>
+    <title>生命科学B 一問一答 (増補版)</title>
     <style>
         body {
-            font-family: "Segoe UI", Meiryo, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, sans-serif;
             line-height: 1.7;
-            margin: 20px;
-            background-color: #f8f9fa;
-            color: #333;
+            margin: 25px;
+            background-color: #f0f8ff;
         }
-        .test-title {
-            text-align: center;
-            color: #333;
-            margin-bottom: 30px;
-        }
-        .section-title {
-            margin-top: 35px;
-            margin-bottom: 20px;
-            font-size: 1.6em;
-            color: #4a5568;
-            border-bottom: 3px solid #e2e8f0;
+        h1, h2 {
+            border-bottom: 3px solid #4682b4;
             padding-bottom: 8px;
+            color: #2c3e50;
         }
-        .question-block {
-            background-color: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-        .question-number {
-            font-weight: 700;
-            font-size: 1.3em;
-            color: #2c5282;
-        }
-        .question-text {
-            margin-top: 8px;
+        details {
             margin-bottom: 18px;
-            font-size: 1.1em;
-            white-space: pre-wrap; /* 改行をそのまま表示 */
+            border: 1px solid #b0c4de;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #ffffff;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.2s ease-in-out;
         }
-        .options button {
-            display: block;
-            width: 100%;
-            padding: 12px 15px;
-            margin: 8px 0;
-            text-align: left;
-            font-size: 1em;
-            background-color: #f7fafc;
-            border: 1px solid #cbd5e0;
-            border-radius: 6px;
+        details:hover {
+            border-color: #4682b4;
+        }
+        summary {
+            font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            outline: none;
+            color: #34495e;
+            list-style: none; /* デフォルトのマーカーを消す */
+            position: relative;
+            padding-left: 25px;
         }
-        .options button:hover:not(:disabled) {
-            background-color: #e2e8f0;
-            border-color: #a0aec0;
+        summary::before {
+            content: '▶'; /* 閉じた状態のマーカー */
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #4682b4;
+            transition: transform 0.2s;
         }
-        .options button:disabled {
-            cursor: default;
-            opacity: 0.6;
+        details[open] summary::before {
+            transform: rotate(90deg); /* 開いた状態のマーカー */
         }
-        .options button.correct {
-            background-color: #48bb78 !important;
-            color: white !important;
-            border-color: #38a169 !important;
+        details[open] summary {
+            color: #4682b4;
+            margin-bottom: 12px;
         }
-        .options button.incorrect {
-            background-color: #f56565 !important;
-            color: white !important;
-            border-color: #c53030 !important;
-        }
-        .feedback {
-            margin-top: 15px;
+        .answer {
+            margin-left: 25px; /* マーカーの分だけインデント */
             padding: 12px;
-            border-radius: 6px;
-            font-size: 1em;
-            min-height: 22px;
-            border-width: 1px;
-            border-style: solid;
+            background-color: #e6f7ff;
+            border-left: 4px solid #4682b4;
+            color: #333;
         }
-        .feedback.correct {
-            background-color: #c6f6d5;
-            color: #2f855a;
-            border-color: #9ae6b4;
+        .answer p {
+            margin: 8px 0;
         }
-        .feedback.incorrect {
-            background-color: #fed7d7;
-            color: #c53030;
-            border-color: #fbb6ce;
-        }
-        .source {
+        .small-text {
             font-size: 0.9em;
-            color: #4a5568;
-            margin-top: 15px;
-            padding: 10px;
-            background-color: #edf2f7;
-            border: 1px dashed #cbd5e0;
-            border-radius: 6px;
-        }
-        #score-container {
-            margin-top: 40px;
-            padding: 25px;
-            background-color: #e2e8f0;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 1.3em;
-        }
-        #score-container h2{
-            margin-top:0;
-            color: #2c5282;
-        }
-        #score-text {
-            margin-bottom: 20px;
-        }
-        #score-container button {
-            padding: 10px 20px;
-            font-size: 1em;
-            background-color: #4299e1;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        #score-container button:hover {
-            background-color: #2b6cb0;
+            color: #555;
         }
     </style>
 </head>
 <body>
 
-    <h1 class="test-title">復習テスト（第2回）</h1>
+    <h1>生命科学B 一問一答 (増補版) 📖</h1>
 
-    <div id="quiz-container">
+    <h2>第6回：DNAと染色体の構造と複製</h2>
+
+    <details>
+        <summary>Q1: DNAを構成するプリン型塩基を2つ挙げてください。</summary>
+        <div class="answer">
+            <p>A: アデニン(A)とグアニン(G)です [cite: 1]。</p>
         </div>
+    </details>
 
-    <div id="score-container" style="display:none;">
-        <h2>テスト結果</h2>
-        <p id="score-text"></p>
-        <button onclick="location.reload()">もう一度挑戦する</button>
-    </div>
+    <details>
+        <summary>Q2: DNAを構成するピリミジン型塩基を2つ挙げてください。</summary>
+        <div class="answer">
+            <p>A: シトシン(C)とチミン(T)です [cite: 1]。</p>
+        </div>
+    </details>
 
-    <script>
-        const quizData = [
-            // I. 動詞の活用と用法 (ser, tener, ir, poder, querer)
-            {
-                section: "I. 動詞の活用と用法 (ser, tener, ir, poder, querer)",
-                questionNumber: 1,
-                question: "次の文の空欄に最も適切な ser の活用形を選びなさい。\n\"Yo _____ de Oviedo.\"",
-                options: { a: "eres", b: "es", c: "soy", d: "somos" },
-                answer: 'c',
-                source: "Conversación04 + ir.pdf"
-            },
-            {
-                questionNumber: 2,
-                question: "「彼らは学生です」という意味になるように、空欄に最も適切な ser の活用形を選びなさい。\n\"Ellos _____ estudiantes.\"",
-                options: { a: "son", b: "sois", c: "somos", d: "es" },
-                answer: 'a',
-                source: "(repaso.pdf の E) Conjugación de ser を参考にした基礎問題)"
-            },
-            {
-                questionNumber: 3,
-                question: "動詞 tener の直説法現在形、「Nosotros」に該当する活用はどれですか？",
-                options: { a: "tienes", b: "tiene", c: "tenemos", d: "tienen" },
-                answer: 'c',
-                source: "Texto06 tener (1).pdf"
-            },
-            {
-                questionNumber: 4,
-                question: "「君、何歳？」と尋ねる表現として正しいものはどれですか？",
-                options: { a: "¿Qué años tienes?", b: "¿Cuántos años eres?", c: "¿Cuántos años tienes?", d: "¿Qué edad es?" },
-                answer: 'c',
-                source: "Texto06 tener (1).pdf"
-            },
-            {
-                questionNumber: 5,
-                question: "「私たちは明日の試験のために準備をしなければならない」という意味になるように、空欄に最も適切な語を選びなさい。\n\"Nosotros _____ que prepararnos para el examen de mañana.\"",
-                options: { a: "tenemos", b: "podemos", c: "vamos", d: "queremos" },
-                answer: 'a',
-                source: "Texto06 tener (1).pdf (tener que + 動詞の原形)"
-            },
-            {
-                questionNumber: 6,
-                question: "動詞 ir の直説法現在形、「Tú」に該当する活用はどれですか？",
-                options: { a: "voy", b: "va", c: "vas", d: "vais" },
-                answer: 'c',
-                source: "Conversación04 + ir.pdf"
-            },
-            {
-                questionNumber: 7,
-                question: "「私は図書館へ行きます」という意味になるように、空欄に最も適切な語を選びなさい。\n\"Yo _____ a la biblioteca.\"",
-                options: { a: "soy", b: "tengo", c: "voy", d: "puedo" },
-                answer: 'c',
-                source: "Conversación04 + ir.pdf"
-            },
-            {
-                questionNumber: 8,
-                question: "「私たちは今週末、映画を見るつもりです」という意味になるように、空欄に最も適切な語を選びなさい。\n\"Nosotros _____ a ver una película este fin de semana.\"",
-                options: { a: "tenemos", b: "vamos", c: "podemos", d: "queremos" },
-                answer: 'b',
-                source: "Conversación04 + ir.pdf"
-            },
-            {
-                questionNumber: 9,
-                question: "動詞 poder の直説法現在形、「Yo」に該当する活用はどれですか？",
-                options: { a: "puedes", b: "puede", c: "puedo", d: "podemos" },
-                answer: 'c',
-                source: "Expresiones03 dias, meses, estaciones + poder.pdf"
-            },
-            {
-                questionNumber: 10,
-                question: "「明日パーティーに来られますか？」と尋ねる文として正しいものはどれですか？",
-                options: { a: "¿Vas a venir a la fiesta mañana?", b: "¿Tienes que venir a la fiesta mañana?", c: "¿Puedes venir a la fiesta mañana?", d: "¿Quieres venir a la fiesta mañana?" },
-                answer: 'c',
-                source: "Expresiones03 dias, meses, estaciones + poder.pdf"
-            },
-            {
-                questionNumber: 11,
-                question: "動詞 querer の直説法現在形、「Él/Ella/Usted」に該当する活用はどれですか？",
-                options: { a: "quiero", b: "quieres", c: "quiere", d: "queremos" },
-                answer: 'c',
-                source: "(ユーザーからの特筆事項に基づき、以前の知識から querer を追加)"
-            },
-            {
-                questionNumber: 12,
-                question: "「私はパエリアが欲しいです」という意味になるように、空欄に最も適切な語を選びなさい。\n\"Yo _____ paella.\"",
-                options: { a: "tengo", b: "voy", c: "puedo", d: "quiero" },
-                answer: 'd',
-                source: "(ユーザーからの特筆事項に基づき、以前の知識から querer を追加)"
-            },
-            {
-                section: "II. 名詞と冠詞・指示詞・所有形容詞",
-                questionNumber: 13,
-                question: "\"aula\" (教室) の前に来る正しい単数定冠詞はどれですか？",
-                options: { a: "la", b: "el", c: "un", d: "una" },
-                answer: 'b',
-                source: "Conversación04 + ir.pdf, Texto05 articulos, demostrativos y posesivos.pdf"
-            },
-            {
-                questionNumber: 14,
-                question: "「いくつかの雑誌」を意味する表現として正しいものはどれですか？",
-                options: { a: "un revistas", b: "unos revistas", c: "una revistas", d: "unas revistas" },
-                answer: 'd',
-                source: "Texto05 articulos, demostrativos y posesivos.pdf"
-            },
-            {
-                questionNumber: 15,
-                question: "「この本」をスペイン語で正しく表現したものはどれですか？ (libro は男性名詞)",
-                options: { a: "este libro", b: "esta libro", c: "ese libro", d: "aquel libro" },
-                answer: 'a',
-                source: "Texto05 articulos, demostrativos y posesivos.pdf"
-            },
-            {
-                questionNumber: 16,
-                question: "「私たちの家」をスペイン語で正しく表現したものはどれですか？ (casa は女性名詞)",
-                options: { a: "nuestro casa", b: "nuestros casa", c: "nuestra casa", d: "nuestras casa" },
-                answer: 'c',
-                source: "Texto05 articulos, demostrativos y posesivos.pdf"
-            },
-            {
-                questionNumber: 17,
-                question: "定冠詞の縮約形について、\"a + el\" は何になりますか？",
-                options: { a: "al", b: "del", c: "el", d: "a el" },
-                answer: 'a',
-                source: "Texto05 articulos, demostrativos y posesivos.pdf"
-            },
-            {
-                section: "III. 曜日・月・季節・数・時間",
-                questionNumber: 18,
-                question: "「月曜日」を意味するスペイン語はどれですか？",
-                options: { a: "martes", b: "lunes", c: "miércoles", d: "jueves" },
-                answer: 'b',
-                source: "Expresiones03 dias, meses, estaciones + poder.pdf"
-            },
-            {
-                questionNumber: 19,
-                question: "「毎週日曜日に私はいつも家にいます。」という意味になるように、空欄に最も適切な形を選びなさい。\n\"_____ domingos me quedo siempre en casa.\"",
-                options: { a: "El", b: "Los", c: "Un", d: "Unos" },
-                answer: 'b',
-                source: "Expresiones03 dias, meses, estaciones + poder.pdf"
-            },
-            {
-                questionNumber: 20,
-                question: "「夏はとても暑い」を意味するスペイン語の文として、より自然なものはどれですか？",
-                options: { a: "El verano es mucho calor.", b: "En el verano hace mucho calor.", c: "En verano hace mucho calor.", d: "Verano está mucho calor." },
-                answer: 'c',
-                source: "Expresiones03 dias, meses, estaciones + poder.pdf"
-            },
-            {
-                questionNumber: 21,
-                question: "「15」をスペイン語で正しく表現したものはどれですか？",
-                options: { a: "cinco y diez", b: "quince", c: "diecicinco", d: "cincodiez" },
-                answer: 'b',
-                source: "Expresiones02 numero y horario.pdf"
-            },
-            {
-                questionNumber: 22,
-                question: "「Son las tres y media.」は何時を示していますか？",
-                options: { a: "3時15分", b: "3時30分", c: "3時45分", d: "2時30分" },
-                answer: 'b',
-                source: "Expresiones02 numero y horario.pdf"
-            },
-            {
-                section: "IV. hay と場所・会話表現",
-                questionNumber: 23,
-                question: "「ここに辞書があります」をスペイン語で正しく表現したものはどれですか？",
-                options: { a: "Aquí es un diccionario.", b: "Aquí está un diccionario.", c: "Aquí hay un diccionario.", d: "Aquí tiene un diccionario." },
-                answer: 'c',
-                source: "Texto04 hay.pdf"
-            },
-            {
-                questionNumber: 24,
-                question: "場所を示す指示副詞について、話し手から最も遠い場所を示すものはどれですか？",
-                options: { a: "aquí", b: "ahí", c: "allí", d: "este" },
-                answer: 'c',
-                source: "Texto04 hay.pdf"
-            },
-            {
-                questionNumber: 25,
-                question: "初めて会った人に「はじめまして」と伝える表現として、話者が男性の場合、より一般的なものはどれですか？",
-                options: { a: "Mucho gusto.", b: "Encantada.", c: "¿Qué tal?", d: "Adiós." },
-                answer: 'a',
-                source: "Conversación04 + ir.pdf, Expresiones01 saludos.pdf (補足: Encantado も男性話者の場合に適切です。問題の意図としてより汎用的なものを想定しています。)"
-            },
-            {
-                questionNumber: 26,
-                question: "\"Perdona. ¿Sabes dónde está el aula 8?\" という質問は、どのような状況で使われますか？",
-                options: { a: "相手の体調を尋ねるとき", b: "場所を尋ねるとき", c: "自己紹介をするとき", d: "天候について話すとき" },
-                answer: 'b',
-                source: "Conversación04 + ir.pdf"
-            },
-            {
-                questionNumber: 27,
-                question: "¿A dónde vas?\" と尋ねられたときの適切な返答はどれですか？",
-                options: { a: "Soy de Tokio.", b: "Voy a la biblioteca.", c: "Estoy bien, gracias.", d: "Me llamo María." },
-                answer: 'b',
-                source: "Conversación04 + ir.pdf, Expresiones01 saludos.pdf"
-            },
-            {
-                questionNumber: 28,
-                question: "「ごめんなさい。すみません。」という意味で、相手が同年代の学生だと想定して使われる砕けた表現はどれですか？",
-                options: { a: "Lo siento.", b: "Perdón.", c: "Perdona.", d: "Disculpe." },
-                answer: 'c',
-                source: "Conversación04 + ir.pdf"
-            }
-        ];
+    <details>
+        <summary>Q3: ヌクレオチドが鎖状になる際の結合様式は何ですか？</summary>
+        <div class="answer">
+            <p>A: リン酸エステル結合です [cite: 1]。</p>
+        </div>
+    </details>
 
-        // DOMが完全に読み込まれてからスクリプトを実行
-        document.addEventListener('DOMContentLoaded', () => {
-            const quizContainer = document.getElementById('quiz-container');
-            const scoreContainer = document.getElementById('score-container');
-            const scoreTextEl = document.getElementById('score-text');
+    <details>
+        <summary>Q4: グアニンとシトシンの間には、何重の水素結合が形成されますか？</summary>
+        <div class="answer">
+            <p>A: 3重の水素結合です [cite: 1]。</p>
+        </div>
+    </details>
 
-            if (!quizContainer || !scoreContainer || !scoreTextEl) {
-                console.error("必要なHTML要素が見つかりません。IDを確認してください。");
-                alert("ページの読み込みに問題が発生しました。必要な要素が見つかりません。");
-                return;
-            }
+    <details>
+        <summary>Q5: DNAはヒストンタンパク質に約何周巻き付いていますか？</summary>
+        <div class="answer">
+            <p>A: 約1.7周です [cite: 1]。</p>
+        </div>
+    </details>
 
-            let currentSection = "";
-            let score = 0;
-            let answeredQuestions = 0;
+    <details>
+        <summary>Q6: ヌクレオソームが高度に凝集したものを何と呼びますか？</summary>
+        <div class="answer">
+            <p>A: クロマチン繊維です [cite: 1]。</p>
+        </div>
+    </details>
 
-            quizData.forEach((item) => {
-                if (item.section && item.section !== currentSection) {
-                    currentSection = item.section;
-                    const sectionTitle = document.createElement('h2');
-                    sectionTitle.className = 'section-title';
-                    sectionTitle.textContent = currentSection;
-                    quizContainer.appendChild(sectionTitle);
-                }
+    <details>
+        <summary>Q7: カリオタイプとは具体的に何を示しますか？</summary>
+        <div class="answer">
+            <p>A: 染色体の「形態」と「数」を表した核型のことです [cite: 1]。</p>
+        </div>
+    </details>
 
-                const questionBlock = document.createElement('div');
-                questionBlock.className = 'question-block';
-                questionBlock.id = `question-${item.questionNumber}`;
+    <details>
+        <summary>Q8: クロマチン再構成複合体は、何を使ってヌクレオソームの間隔を変化させますか？</summary>
+        <div class="answer">
+            <p>A: ATPです [cite: 1]。</p>
+        </div>
+    </details>
 
-                const questionNumberP = document.createElement('p');
-                questionNumberP.className = 'question-number';
-                questionNumberP.textContent = `設問${item.questionNumber}:`;
-                questionBlock.appendChild(questionNumberP);
+    <details>
+        <summary>Q9: テロメアは、DNA複製のどの鎖のどの末端で問題となる配列喪失を防ぎますか？</summary>
+        <div class="answer">
+            <p>A: ラギング鎖の5'末端側です [cite: 1]。</p>
+        </div>
+    </details>
 
-                const questionTextP = document.createElement('p');
-                questionTextP.className = 'question-text';
-                questionTextP.textContent = item.question; // textContentで改行も安全に扱える (CSS white-space: pre-wrap と併用)
-                questionBlock.appendChild(questionTextP);
+    <details>
+        <summary>Q10: 転写が起こりにくいのはヘテロクロマチンですか、ユークロマチンですか？</summary>
+        <div class="answer">
+            <p>A: ヘテロクロマチンです [cite: 1]。</p>
+        </div>
+    </details>
 
-                const optionsDiv = document.createElement('div');
-                optionsDiv.className = 'options';
-                optionsDiv.id = `options-${item.questionNumber}`; // 各選択肢グループにIDを付与
+    <details>
+        <summary>Q11: DNAの複製は、どの酵素によってどの方向（5'→3' or 3'→5'）に進みますか？</summary>
+        <div class="answer">
+            <p>A: DNAポリメラーゼによって、5'→3'の方向に進みます [cite: 1]。</p>
+        </div>
+    </details>
 
-                for (const key in item.options) {
-                    const button = document.createElement('button');
-                    button.setAttribute('data-question-id', String(item.questionNumber)); // 念のためStringに
-                    button.setAttribute('data-option', key);
-                    button.innerHTML = `<b>${key.toUpperCase()})</b> ${item.options[key]}`;
-                    button.onclick = handleOptionClick;
-                    optionsDiv.appendChild(button);
-                }
-                questionBlock.appendChild(optionsDiv);
+    <details>
+        <summary>Q12: DNA複製時に二本鎖DNAを開裂する酵素は何ですか？</summary>
+        <div class="answer">
+            <p>A: DNAヘリケースです [cite: 1]。</p>
+        </div>
+    </details>
 
-                const feedbackP = document.createElement('p');
-                feedbackP.className = 'feedback';
-                feedbackP.id = `feedback-${item.questionNumber}`;
-                questionBlock.appendChild(feedbackP);
+    <details>
+        <summary>Q13: 岡崎フラグメント同士を連結する酵素は何ですか？</summary>
+        <div class="answer">
+            <p>A: DNAリガーゼです [cite: 1]。</p>
+        </div>
+    </details>
 
-                if (item.source) {
-                    const sourceP = document.createElement('p');
-                    sourceP.className = 'source';
-                    sourceP.id = `source-${item.questionNumber}`;
-                    sourceP.textContent = `ソース: ${item.source}`;
-                    sourceP.style.display = 'none'; // 初期状態は非表示
-                    questionBlock.appendChild(sourceP);
-                }
-                quizContainer.appendChild(questionBlock);
-            });
+    <details>
+        <summary>Q14: DNAの一方の鎖に損傷が生じた場合、修復の際に鋳型となるのはどちらの鎖ですか？</summary>
+        <div class="answer">
+            <p>A: 損傷が起きていない側の鎖です [cite: 2]。</p>
+        </div>
+    </details>
 
-            function handleOptionClick(event) {
-                const selectedButton = event.currentTarget;
-                const questionId = parseInt(selectedButton.getAttribute('data-question-id'), 10);
-                const selectedOptionKey = selectedButton.getAttribute('data-option');
+    <details>
+        <summary>Q15: 1塩基のミスマッチを修復するメカニズムを何と呼びますか？</summary>
+        <div class="answer">
+            <p>A: ミスマッチ修復です [cite: 2]。</p>
+        </div>
+    </details>
 
-                const questionData = quizData.find(q => q.questionNumber === questionId);
-                const optionsGroup = document.getElementById(`options-${questionId}`);
+    <details>
+        <summary>Q16: 2本鎖切断の修復方法のうち、ヌクレオチドが欠落する可能性があるのはどちらですか？</summary>
+        <div class="answer">
+            <p>A: 非騒動末端連結です [cite: 2]。</p>
+        </div>
+    </details>
 
-                if (!questionData || (optionsGroup && optionsGroup.dataset.answered === 'true')) {
-                    return; // データがないか、既に回答済みなら何もしない
-                }
-                if(optionsGroup) optionsGroup.dataset.answered = 'true'; // 回答済みの印
+    <details>
+        <summary>Q17: 相同組換え修復では、損傷したDNAのどの末端が分解されますか？</summary>
+        <div class="answer">
+            <p>A: 5'末端です [cite: 2]。</p>
+        </div>
+    </details>
 
-                answeredQuestions++;
+    <h2>第7回：転写と翻訳 📜➡️ M️</h2>
 
-                const correctAnswerKey = questionData.answer;
-                const correctAnswerText = questionData.options[correctAnswerKey];
-                const feedbackEl = document.getElementById(`feedback-${questionId}`);
-                const sourceEl = document.getElementById(`source-${questionId}`);
+    <details>
+        <summary>Q18: 転写において、調節タンパク質や基本転写因子が結合する領域は何ですか？</summary>
+        <div class="answer">
+            <p>A: 転写調節領域です [cite: 2]。</p>
+        </div>
+    </details>
 
-                const allOptionButtons = document.querySelectorAll(`#options-${questionId} button`);
-                allOptionButtons.forEach(btn => {
-                    btn.disabled = true; // 全てのボタンを無効化
-                });
+    <details>
+        <summary>Q19: RNAポリメラーゼが結合する領域を何と呼びますか？</summary>
+        <div class="answer">
+            <p>A: プロモーターです [cite: 2]。</p>
+        </div>
+    </details>
 
-                if (selectedOptionKey === correctAnswerKey) {
-                    score++;
-                    selectedButton.classList.add('correct');
-                    if(feedbackEl) {
-                        feedbackEl.textContent = "正解です！";
-                        feedbackEl.className = 'feedback correct';
-                    }
-                    if (sourceEl) {
-                        sourceEl.style.display = 'none';
-                    }
-                } else {
-                    selectedButton.classList.add('incorrect');
-                    if(feedbackEl) {
-                        feedbackEl.innerHTML = `不正解です。正解は <b>${correctAnswerKey.toUpperCase()}) ${correctAnswerText}</b> です。`;
-                        feedbackEl.className = 'feedback incorrect';
-                    }
-                    if (sourceEl) {
-                        sourceEl.style.display = 'block';
-                    }
-                    // 正解の選択肢もハイライト（任意）
-                    allOptionButtons.forEach(btn => {
-                        if (btn.getAttribute('data-option') === correctAnswerKey) {
-                            // 例: btn.style.borderColor = 'green'; btn.style.borderWidth = '2px';
-                        }
-                    });
-                }
+    <details>
+        <summary>Q20: 真核生物の転写産物に含まれる、タンパク質情報を持つ領域と持たない領域をそれぞれ何と呼びますか？</summary>
+        <div class="answer">
+            <p>A: 持つ領域を「エキソン」、持たない領域を「イントロン」と呼びます [cite: 2]。</p>
+        </div>
+    </details>
 
-                if (answeredQuestions === quizData.length) {
-                    showFinalScore();
-                }
-            }
+    <details>
+        <summary>Q21: スプライシング後のmRNAを何と呼びますか？</summary>
+        <div class="answer">
+            <p>A: 成熟mRNAです [cite: 2]。</p>
+        </div>
+    </details>
 
-            function showFinalScore() {
-                if (scoreContainer && scoreTextEl && quizContainer) {
-                    scoreContainer.style.display = 'block';
-                    const percentage = (quizData.length > 0) ? (score / quizData.length * 100).toFixed(1) : 0;
-                    scoreTextEl.innerHTML = `全 ${quizData.length} 問中 ${score} 問正解しました。<br>正解率: ${percentage}%`;
-                    quizContainer.style.display = 'none';
-                }
-            }
-        });
-    </script>
+    <details>
+        <summary>Q22: mRNAの5'キャップに結合するのは何ですか？</summary>
+        <div class="answer">
+            <p>A: メチル化グアノシンです [cite: 2]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q23: mRNAの3'側に付加される長いアデニンの配列を何と呼びますか？</summary>
+        <div class="answer">
+            <p>A: ポリAテールです [cite: 2]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q24: 翻訳において、リボソームが最初にmRNAに結合するのはどの部分ですか？</summary>
+        <div class="answer">
+            <p>A: 5'キャップ構造です [cite: 2]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q25: 翻訳の開始コドンは何ですか？</summary>
+        <div class="answer">
+            <p>A: AUGです [cite: 2]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q26: 翻訳中にアミノ酸同士が形成する結合は何ですか？</summary>
+        <div class="answer">
+            <p>A: ペプチド結合です [cite: 2]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q27: 終止コドンを3つすべて挙げてください。</summary>
+        <div class="answer">
+            <p>A: UAA, UAG, UGA です [cite: 2]。</p>
+        </div>
+    </details>
+
+    <h2>第8回：遺伝子発現調節とゲノム 🎮</h2>
+
+    <details>
+        <summary>Q28: 転写活性化因子が結合するDNA領域を何と呼びますか？</summary>
+        <div class="answer">
+            <p>A: エンハンサーです [cite: 2]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q29: 転写抑制因子が結合するDNA領域を何と呼びますか？</summary>
+        <div class="answer">
+            <p>A: サイレンサーです [cite: 2]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q30: mRNAが核から細胞質へ出る際に通過する構造は何ですか？</summary>
+        <div class="answer">
+            <p>A: 核膜孔です [cite: 3]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q31: ある転写因子が自身の発現を促進するループを何と呼びますか？</summary>
+        <div class="answer">
+            <p>A: 正のフィードバックです [cite: 3]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q32: DNAメチル化が起こると、転写活性はどうなりますか？</summary>
+        <div class="answer">
+            <p>A: 大幅に低下します [cite: 3]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q33: ヒストンの修飾は娘細胞にどのように受け継がれますか？</summary>
+        <div class="answer">
+            <p>A: 親の修飾ヒストンの半分を受け継ぎ、新しいヒストンも同じ種類の修飾を受けます [cite: 3]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q34: miRNAが結合するmRNAの領域はどこですか？</summary>
+        <div class="answer">
+            <p>A: 非翻訳領域 (UTR) です [cite: 3]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q35: siRNAは何から生じますか？ それを生成する酵素は何ですか？</summary>
+        <div class="answer">
+            <p>A: 外来の二本鎖RNAから生じ、DICERという酵素によって切断されます [cite: 3]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q36: lncRNAの長さはどのくらいですか？</summary>
+        <div class="answer">
+            <p>A: 200塩基対以上です [cite: 3]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q37: 三毛猫の毛色に関わるX染色体の不活化の例で有名なlncRNAは何ですか？</summary>
+        <div class="answer">
+            <p>A: Xist です [cite: 3]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q38: 細菌に多く見られるトランスポゾンはどちらの型ですか？</summary>
+        <div class="answer">
+            <p>A: DNA型トランスポゾンです [cite: 3]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q39: レトロトランスポゾンがゲノムに組み込まれる前に経由する中間体と、その際に働く酵素は何ですか？</summary>
+        <div class="answer">
+            <p>A: 中間体はRNA、酵素は逆転写酵素です [cite: 3]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q40: ヒトのDNAの半分近くを占めるレトロトランスポゾンの例を2つ挙げてください。</summary>
+        <div class="answer">
+            <p>A: L1 element と Alu sequence です [cite: 3]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q41: ウイルスとはどのようなものですか？</summary>
+        <div class="answer">
+            <p>A: エンベロープに覆われた核酸で構成される感染性の粒子で、宿主の細胞内のみで複製が起こります [cite: 3]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q42: ヒトゲノムには約何個の遺伝子がありますか？ そのうちタンパク質をコードしているのは何個ですか？</summary>
+        <div class="answer">
+            <p>A: 約24000個あり、そのうちタンパク質をコードしているのは19000個です [cite: 4]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q43: ヒトゲノムの約20%を占める長い散在反復配列は何ですか？</summary>
+        <div class="answer">
+            <p>A: LINEs (Long Interspersed Nuclear Elements) です [cite: 4]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q44: ヒトゲノムの約10%強を占める短い散在反復配列は何ですか？</summary>
+        <div class="answer">
+            <p>A: SINEs (Short Interspersed Nuclear Elements) です [cite: 4]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q45: 2人の人間のゲノムの差異は約何%ですか？</summary>
+        <div class="answer">
+            <p>A: 約0.1%です [cite: 4]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q46: 集団の何%以上に変異が見られる場合、SNPと判定されますか？</summary>
+        <div class="answer">
+            <p>A: 1%以上です [cite: 4]。</p>
+        </div>
+    </details>
+
+    <h2>第9回：DNAテクノロジー 🛠️</h2>
+
+    <details>
+        <summary>Q47: 制限酵素は、なぜ自身のDNAを切断しないのですか？</summary>
+        <div class="answer">
+            <p>A: 自身のDNAは化学修飾によって切断されないようになっているためです [cite: 4]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q48: DNAリガーゼがDNA断片を連結する際に消費するものは何ですか？</summary>
+        <div class="answer">
+            <p>A: ATPです [cite: 4]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q49: PCRの3つのステップの名称と、おおよその温度を教えてください。</summary>
+        <div class="answer">
+            <p>A: 1. 熱変性 (約90℃)、2. アニーリング (プライマー結合、温度はプライマーによる)、3. 伸長 (DNAポリメラーゼによる、約72℃など) です [cite: 4]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q50: サンガー法で用いるdNTPとddNTPの構造的な違いは何ですか？</summary>
+        <div class="answer">
+            <p>A: ddNTPは、デオキシリボースの3位の炭素にヒドロキシ基(-OH)が存在しない点です [cite: 4]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q51: サンガー法で生じた長さの異なるDNA断片を分離する方法は何ですか？</summary>
+        <div class="answer">
+            <p>A: 電気泳動です [cite: 4]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q52: DNAクローニングにおいて、目的の遺伝子をベクターに挿入する際、同じものを使うべきなのは何ですか？</summary>
+        <div class="answer">
+            <p>A: 制限酵素です [cite: 4]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q53: DNAクローニングでベクターを導入し、増殖させるために一般的に用いられる生物は何ですか？</summary>
+        <div class="answer">
+            <p>A: バクテリア（大腸菌など）です [cite: 4]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q54: 遺伝子ノックダウンは、何を破壊することで遺伝子の働きを抑えますか？</summary>
+        <div class="answer">
+            <p>A: mRNAを破壊します [cite: 5]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q55: ノックアウトの手法である相同組換えとは、どのような現象を利用していますか？</summary>
+        <div class="answer">
+            <p>A: 対合した染色体間で起こる、染色体の乗り換えを利用しています [cite: 5]。</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Q56: CRISPR/Cas9システムにおいて、ゲノムを切断する酵素と、標的遺伝子を認識する分子はそれぞれ何ですか？</summary>
+        <div class="answer">
+            <p>A: 切断する酵素は「Cas9」、認識する分子は「ガイドRNA」です [cite: 5]。</p>
+        </div>
+    </details>
+
 </body>
 </html>
